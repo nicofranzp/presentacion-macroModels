@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1600 380" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cada versión nueva deriva de una versión publicada y registra qué cambió" style="font-family: inherit;">
+  <!-- Root: the version in use (visible from the start) -->
+  <g>
+    <rect x="40" y="105" width="440" height="166" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="40" y="105" width="440" height="64" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="40" y="145" width="440" height="24" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="68" y="148" style="font-size: 32px; font-weight: 700; fill: #ffffff;">Versión 1.0.0</text>
+    <rect x="340" y="119" width="116" height="36" rx="18" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="398" y="144" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">en uso</text>
+    <text x="68" y="212" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Publicada: no se edita</text>
+    <text x="68" y="248" style="font-size: 22px; fill: var(--fig-muted, #52525b);">identificada por su huella</text>
+  </g>
+
+  <!-- Each derived version: an elbow from the root, a version badge and what changed -->
+  <g class="frag" data-fragment-index="1">
+    <path d="M482,188 H600 V58 H754" style="fill: none; stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="760" y="10" width="800" height="96" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="760" y="10" width="150" height="96" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="880" y="10" width="30" height="96" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="835" y="69" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: #ffffff;">1.0.1</text>
+    <text x="940" y="52" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Implementación</text>
+    <text x="940" y="86" style="font-size: 22px; fill: var(--fig-muted, #52525b);">cambio operativo; la economía no cambia</text>
+  </g>
+
+  <g class="frag" data-fragment-index="2">
+    <path d="M600,188 H754" style="fill: none; stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="760" y="140" width="800" height="96" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="760" y="140" width="150" height="96" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="880" y="140" width="30" height="96" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="835" y="199" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: #ffffff;">1.1.0</text>
+    <text x="940" y="182" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Calibración y análisis de política</text>
+    <text x="940" y="216" style="font-size: 22px; fill: var(--fig-muted, #52525b);">parámetros y ajustes para contrafactuales</text>
+  </g>
+
+  <g class="frag" data-fragment-index="3">
+    <path d="M600,188 V318 H754" style="fill: none; stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="760" y="270" width="800" height="96" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="760" y="270" width="150" height="96" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="880" y="270" width="30" height="96" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="835" y="329" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: #ffffff;">2.0.0</text>
+    <text x="940" y="312" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Cambio estructural</text>
+    <text x="940" y="346" style="font-size: 22px; fill: var(--fig-muted, #52525b);">cambia la estructura económica del modelo</text>
+  </g>
+
+</svg>

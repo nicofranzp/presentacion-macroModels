@@ -10,3 +10,30 @@
 .reveal div.column {
   justify-content: flex-start;
 }
+
+/* Quotations in the institution's accent (gold), bar included. */
+.reveal .slide blockquote {
+  color: var(--theme-interactive-secondary);
+  border-left-color: var(--theme-interactive-secondary);
+}
+
+/* `::: {.smaller}` shrinks one block (e.g. a table) instead of the whole
+   slide, which `## Title {.smaller}` does. */
+.reveal div.smaller {
+  font-size: 0.7em;
+}
+
+/* Code listings are read from the back of the room: larger than the
+   theme's 0.55em code, with a matching title. */
+.reveal div.listing pre {
+  font-size: 0.75em;
+}
+
+/* Show the whole listing: no scroll box (the theme caps code at 400px). */
+.reveal div.listing pre code {
+  max-height: none;
+}
+
+.reveal div.listing figcaption {
+  font-size: 0.9em;
+}

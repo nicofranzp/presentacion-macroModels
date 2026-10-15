@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1600 490" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lo que define una versión publicada de un modelo, agrupado por la pregunta que responde" style="font-family: inherit;">
+  <!-- One card per question a published version (dist/) answers; each
+       item names what it is, the file that holds it and, when useful, why.
+       One card per click. -->
+
+  <g class="frag" data-fragment-index="1">
+    <rect x="40" y="20" width="365" height="450" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="40" y="20" width="365" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="40" y="60" width="365" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="64" y="64" style="font-size: 28px; font-weight: 700; fill: #ffffff;">Representación</text>
+    <text x="64" y="126" style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">¿Qué es el modelo?</text>
+    <text x="64" y="180" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Ecuaciones</text>
+    <text x="64" y="208" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">equations.csv · *.mod</text>
+    <text x="64" y="260" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Variables y shocks</text>
+    <text x="64" y="288" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">*_registry.csv</text>
+    <text x="64" y="340" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Parámetros</text>
+    <text x="64" y="368" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">parameters.csv</text>
+    <text x="64" y="420" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Estado estacionario</text>
+    <text x="64" y="448" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">steady_state.csv</text>
+  </g>
+
+  <g class="frag" data-fragment-index="2">
+    <rect x="425" y="20" width="365" height="450" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="425" y="20" width="365" height="66" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="425" y="60" width="365" height="26" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="449" y="64" style="font-size: 28px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Contraste con datos</text>
+    <text x="449" y="126" style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">¿Cómo se contrasta?</text>
+    <text x="449" y="180" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Observables</text>
+    <text x="449" y="208" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">observables.csv</text>
+    <text x="449" y="238" style="font-size: 20px; fill: var(--fig-muted, #52525b);">serie, error de medida y pipeline</text>
+    <text x="449" y="290" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Variables de estado</text>
+    <text x="449" y="318" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">state.csv</text>
+    <text x="449" y="348" style="font-size: 20px; fill: var(--fig-muted, #52525b);">para filtrar y re-simular</text>
+  </g>
+
+  <g class="frag" data-fragment-index="3">
+    <rect x="810" y="20" width="365" height="450" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="810" y="20" width="365" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="810" y="60" width="365" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="834" y="64" style="font-size: 28px; font-weight: 700; fill: #ffffff;">Solución</text>
+    <text x="834" y="126" style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">¿Qué dice el modelo?</text>
+    <text x="834" y="180" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Impulso-respuesta</text>
+    <text x="834" y="208" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">irf.json</text>
+  </g>
+
+  <g class="frag" data-fragment-index="4">
+    <rect x="1195" y="20" width="365" height="450" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 2.5;"/>
+    <rect x="1195" y="20" width="365" height="66" rx="16" style="fill: var(--fig-muted, #52525b);"/>
+    <rect x="1195" y="60" width="365" height="26" style="fill: var(--fig-muted, #52525b);"/>
+    <text x="1219" y="64" style="font-size: 28px; font-weight: 700; fill: #ffffff;">Identidad</text>
+    <text x="1219" y="126" style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">¿Qué versión es?</text>
+    <text x="1219" y="180" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Metadatos y linaje</text>
+    <text x="1219" y="208" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">model.json</text>
+    <text x="1219" y="260" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Huella</text>
+    <text x="1219" y="288" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">bundle_manifest.csv</text>
+    <text x="1219" y="340" style="font-size: 23px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Validación</text>
+    <text x="1219" y="368" style="font-family: monospace; font-size: 17px; fill: var(--fig-muted, #52525b);">validation_result.json</text>
+  </g>
+</svg>

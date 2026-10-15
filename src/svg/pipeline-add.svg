@@ -1,0 +1,86 @@
+<svg viewBox="0 0 1600 400" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Los cinco pasos para agregar o cambiar un observable" style="font-family: inherit;">
+  <defs>
+    <marker id="step-arrow-losci" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" style="fill: var(--fig-muted, #52525b);"/>
+    </marker>
+  </defs>
+
+  <!-- Each step: a numbered header, what happens in plain words, and the
+       tool or file that does it (mono pill). Steps appear one per click. -->
+
+  <g class="frag" data-fragment-index="1">
+    <rect x="40" y="20" width="280" height="360" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="40" y="20" width="280" height="70" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="40" y="64" width="280" height="26" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="64" y="66" style="font-size: 28px; font-weight: 700; fill: var(--fig-brand, #1b365d);">1 · Escribir</text>
+    <g style="font-size: 22px; fill: var(--fig-ink, #1b365d);">
+      <text x="64" y="140">el pipeline: de</text>
+      <text x="64" y="174">dónde vienen las</text>
+      <text x="64" y="208">series y qué pasos</text>
+      <text x="64" y="242">lo construyen</text>
+    </g>
+    <rect x="54" y="318" width="252" height="38" rx="19" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="180" y="344" text-anchor="middle" style="font-family: monospace; font-size: 19px; fill: var(--fig-brand, #1b365d);">definitions/</text>
+  </g>
+
+  <g class="frag" data-fragment-index="2">
+    <line x1="322" y1="200" x2="346" y2="200" marker-end="url(#step-arrow-losci)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="350" y="20" width="280" height="360" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="350" y="20" width="280" height="70" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="350" y="64" width="280" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="374" y="66" style="font-size: 28px; font-weight: 700; fill: #ffffff;">2 · Comparar</text>
+    <g style="font-size: 22px; fill: var(--fig-ink, #1b365d);">
+      <text x="374" y="140">con una fuente</text>
+      <text x="374" y="174">confiable en el</text>
+      <text x="374" y="208">período común;</text>
+      <text x="374" y="242">registrar salvedades</text>
+    </g>
+    <rect x="364" y="318" width="252" height="38" rx="19" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="490" y="344" text-anchor="middle" style="font-family: monospace; font-size: 19px; fill: var(--fig-brand, #1b365d);">metadata.caveats</text>
+  </g>
+
+  <g class="frag" data-fragment-index="3">
+    <line x1="632" y1="200" x2="656" y2="200" marker-end="url(#step-arrow-losci)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="660" y="20" width="280" height="360" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="660" y="20" width="280" height="70" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="660" y="64" width="280" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="684" y="66" style="font-size: 28px; font-weight: 700; fill: #ffffff;">3 · Asociar</text>
+    <g style="font-size: 22px; fill: var(--fig-ink, #1b365d);">
+      <text x="684" y="140">al observable del</text>
+      <text x="684" y="174">modelo que lo usa</text>
+    </g>
+    <rect x="674" y="318" width="252" height="38" rx="19" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="800" y="344" text-anchor="middle" style="font-family: monospace; font-size: 19px; fill: var(--fig-brand, #1b365d);">observables.csv</text>
+  </g>
+
+  <g class="frag" data-fragment-index="4">
+    <line x1="942" y1="200" x2="966" y2="200" marker-end="url(#step-arrow-losci)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="970" y="20" width="280" height="360" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="970" y="20" width="280" height="70" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="970" y="64" width="280" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="994" y="66" style="font-size: 28px; font-weight: 700; fill: #ffffff;">4 · Probar</text>
+    <g style="font-size: 22px; fill: var(--fig-ink, #1b365d);">
+      <text x="994" y="140">cada pipeline se</text>
+      <text x="994" y="174">valida contra su</text>
+      <text x="994" y="208">esquema</text>
+    </g>
+    <rect x="984" y="318" width="252" height="38" rx="19" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="1110" y="344" text-anchor="middle" style="font-family: monospace; font-size: 19px; fill: var(--fig-brand, #1b365d);">run_all_tests</text>
+  </g>
+
+  <g class="frag" data-fragment-index="5">
+    <line x1="1252" y1="200" x2="1276" y2="200" marker-end="url(#step-arrow-losci)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <rect x="1280" y="20" width="280" height="360" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="1280" y="20" width="280" height="70" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="1280" y="64" width="280" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="1304" y="66" style="font-size: 28px; font-weight: 700; fill: #ffffff;">5 · Registrar</text>
+    <g style="font-size: 22px; fill: var(--fig-ink, #1b365d);">
+      <text x="1304" y="140">commit: su huella</text>
+      <text x="1304" y="174">queda en cada</text>
+      <text x="1304" y="208">vintage que</text>
+      <text x="1304" y="242">lo usa</text>
+    </g>
+    <rect x="1294" y="318" width="252" height="38" rx="19" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="1420" y="344" text-anchor="middle" style="font-family: monospace; font-size: 19px; fill: var(--fig-brand, #1b365d);">git commit</text>
+  </g>
+</svg>

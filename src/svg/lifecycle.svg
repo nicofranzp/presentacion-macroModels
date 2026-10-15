@@ -1,82 +1,95 @@
-<svg viewBox="0 0 1600 600" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo de vida de una revisión del ejercicio: en trabajo, en revisión, aprobada, oficial, pública; ramas de devolución y descarte" style="font-family: inherit;">
+<svg viewBox="0 0 1600 600" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo de vida de una revisión: de en trabajo a oficial, con quién decide cada paso" style="font-family: inherit;">
   <defs>
-    <marker id="life-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="gov-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" style="fill: var(--fig-muted, #52525b);"/>
     </marker>
   </defs>
 
-  <!-- 0: workspace (visible from the start) -->
+  <!-- States as cards (stage code in the pill); each transition says what
+       happens and who decides. Frozen states sit under the bracket. -->
+
   <g>
-    <rect x="20" y="150" width="250" height="100" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="145" y="194" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">en trabajo</text>
-    <text x="145" y="228" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">corrida guardada</text>
+    <rect x="40" y="170" width="250" height="140" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="40" y="170" width="250" height="58" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="40" y="204" width="250" height="24" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="165" y="210" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">En trabajo</text>
+    <text x="165" y="262" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">corrida guardada,</text>
+    <text x="165" y="290" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">se puede rehacer</text>
   </g>
 
-  <!-- 1: review snapshot, and the frozen bracket -->
   <g class="frag" data-fragment-index="1">
-    <line x1="272" y1="200" x2="339" y2="200" marker-end="url(#life-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <text x="307" y="110" text-anchor="middle" style="font-size: 18px; font-style: italic; fill: var(--fig-muted, #52525b);">congelar</text>
-    <text x="307" y="132" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-series-1, #1a5f8f);">analista</text>
-    <rect x="345" y="150" width="250" height="100" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="470" y="194" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">en revisión</text>
-    <text x="470" y="228" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">review_snapshot</text>
-    <path d="M345 60 L345 44 L1570 44 L1570 60" style="fill: none; stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
-    <text x="958" y="32" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">congelada: hashes verificados y fijados; cualquier edición se detecta y bloquea nuevas decisiones</text>
+    <line x1="292" y1="240" x2="348" y2="240" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="321.0" y="120" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-ink, #1b365d);">congelar</text>
+    <text x="321.0" y="144" text-anchor="middle" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">analista</text>
+    <rect x="352" y="170" width="250" height="140" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="352" y="170" width="250" height="58" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="352" y="204" width="250" height="24" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="477" y="210" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">En revisión</text>
+    <rect x="368" y="260" width="218" height="34" rx="17" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="477" y="283" text-anchor="middle" style="font-family: monospace; font-size: 17px; fill: var(--fig-brand, #1b365d);">review_snapshot</text>
+    <path d="M352,70 V54 H1538 V70" style="fill: none; stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
+    <text x="945" y="38" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">congelada: cualquier edición se detecta y bloquea nuevas decisiones</text>
   </g>
 
-  <!-- 2: approved -->
   <g class="frag" data-fragment-index="2">
-    <line x1="597" y1="200" x2="664" y2="200" marker-end="url(#life-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <text x="632" y="110" text-anchor="middle" style="font-size: 18px; font-style: italic; fill: var(--fig-muted, #52525b);">aprobar</text>
-    <text x="632" y="132" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-series-1, #1a5f8f);">jefatura</text>
-    <rect x="670" y="150" width="250" height="100" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="795" y="194" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">aprobada</text>
-    <text x="795" y="228" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">approved_revision</text>
+    <line x1="604" y1="240" x2="660" y2="240" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="633.0" y="120" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-ink, #1b365d);">aprobar</text>
+    <text x="633.0" y="144" text-anchor="middle" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">jefatura</text>
+    <rect x="664" y="170" width="250" height="140" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="664" y="170" width="250" height="58" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="664" y="204" width="250" height="24" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="789" y="210" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">Aprobada</text>
+    <rect x="680" y="260" width="218" height="34" rx="17" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="789" y="283" text-anchor="middle" style="font-family: monospace; font-size: 17px; fill: var(--fig-brand, #1b365d);">approved_revision</text>
   </g>
 
-  <!-- 3: official -->
   <g class="frag" data-fragment-index="3">
-    <line x1="922" y1="200" x2="989" y2="200" marker-end="url(#life-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <text x="957" y="110" text-anchor="middle" style="font-size: 18px; font-style: italic; fill: var(--fig-muted, #52525b);">oficializar + promote</text>
-    <text x="957" y="132" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-series-1, #1a5f8f);">Consejo</text>
-    <rect x="995" y="150" width="250" height="100" rx="12" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
-    <text x="1120" y="194" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">oficial</text>
-    <text x="1120" y="228" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">official_revision</text>
+    <line x1="916" y1="240" x2="972" y2="240" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="945.0" y="120" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-ink, #1b365d);">oficializar</text>
+    <text x="945.0" y="144" text-anchor="middle" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">Consejo</text>
+    <rect x="976" y="170" width="250" height="140" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="976" y="170" width="250" height="58" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="976" y="204" width="250" height="24" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="1101" y="210" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">Oficial</text>
+    <rect x="992" y="260" width="218" height="34" rx="17" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="1101" y="283" text-anchor="middle" style="font-family: monospace; font-size: 17px; fill: var(--fig-brand, #1b365d);">official_revision</text>
   </g>
 
-  <!-- 4: public -->
   <g class="frag" data-fragment-index="4">
-    <line x1="1247" y1="200" x2="1314" y2="200" marker-end="url(#life-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <text x="1282" y="110" text-anchor="middle" style="font-size: 18px; font-style: italic; fill: var(--fig-muted, #52525b);">Fase 4</text>
-    <text x="1282" y="132" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-series-1, #1a5f8f);">Consejo</text>
-    <rect x="1320" y="150" width="250" height="100" rx="12" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
-    <text x="1445" y="194" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">pública</text>
-    <text x="1445" y="228" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">public_artifact</text>
+    <line x1="1228" y1="240" x2="1284" y2="240" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3; stroke-dasharray: 8 6;"/>
+    <text x="1257.0" y="120" text-anchor="middle" style="font-size: 21px; font-weight: 700; fill: var(--fig-ink, #1b365d);">publicar</text>
+    <text x="1257.0" y="144" text-anchor="middle" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">fase 4</text>
+    <rect x="1288" y="170" width="250" height="140" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 2.5; stroke-dasharray: 9 6;"/>
+    <rect x="1288" y="170" width="250" height="58" rx="16" style="fill: var(--fig-muted, #52525b);"/>
+    <rect x="1288" y="204" width="250" height="24" style="fill: var(--fig-muted, #52525b);"/>
+    <text x="1413" y="210" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">Pública</text>
+    <rect x="1304" y="260" width="218" height="34" rx="17" style="fill: var(--fig-grid, #e4e4e7);"/>
+    <text x="1413" y="283" text-anchor="middle" style="font-family: monospace; font-size: 17px; fill: var(--fig-brand, #1b365d);">public_artifact</text>
   </g>
 
-  <!-- 5: returned branch -->
   <g class="frag" data-fragment-index="5">
-    <rect x="507" y="420" width="250" height="100" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-series-4, #c94b4b); stroke-width: 3; stroke-dasharray: 10 6;"/>
-    <text x="632" y="464" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-series-4, #c94b4b);">devuelta</text>
-    <text x="632" y="498" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">sigue congelada, final</text>
-    <g style="stroke: var(--fig-series-4, #c94b4b); stroke-width: 3; fill: none;">
-      <line x1="470" y1="252" x2="580" y2="414" marker-end="url(#life-arrow)"/>
-      <line x1="795" y1="252" x2="685" y2="414" marker-end="url(#life-arrow)"/>
-    </g>
-    <g style="font-size: 19px; font-style: italic; fill: var(--fig-ink, #1b365d);">
-      <text x="430" y="340" text-anchor="end">jefatura</text>
-      <text x="840" y="340">Consejo</text>
-    </g>
-    <text x="780" y="560" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">→ se responde con una corrida hija: revision_of(…, "governance_revision", …)</text>
+    <line x1="477.0" y1="314" x2="704" y2="414" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <line x1="789.0" y1="314" x2="789.0" y2="414" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="467.0" y="370" text-anchor="end" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">jefatura</text>
+    <text x="803.0" y="370" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">Consejo</text>
+    <rect x="664" y="420" width="250" height="166" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 2.5;"/>
+    <rect x="664" y="420" width="250" height="58" rx="16" style="fill: var(--fig-muted, #52525b);"/>
+    <rect x="664" y="454" width="250" height="24" style="fill: var(--fig-muted, #52525b);"/>
+    <text x="789" y="460" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">Devuelta</text>
+    <text x="789" y="512" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">sigue congelada;</text>
+    <text x="789" y="540" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">se responde con una</text>
+    <text x="789" y="568" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">corrida hija</text>
   </g>
 
-  <!-- 6: discarded branch -->
   <g class="frag" data-fragment-index="6">
-    <rect x="20" y="420" width="250" height="100" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 3; stroke-dasharray: 10 6;"/>
-    <text x="145" y="464" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-muted, #52525b);">descartada</text>
-    <text x="145" y="498" text-anchor="middle" style="font-size: 20px; fill: var(--fig-muted, #52525b);">quién, cuándo, por qué</text>
-    <line x1="145" y1="252" x2="145" y2="414" marker-end="url(#life-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <text x="160" y="340" style="font-size: 19px; font-style: italic; fill: var(--fig-ink, #1b365d);">analista</text>
-    <text x="20" y="560" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">→ cleanup_workspace la elimina</text>
+    <line x1="165.0" y1="314" x2="165.0" y2="414" marker-end="url(#gov-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="179.0" y="370" style="font-size: 19px; font-style: italic; fill: var(--fig-muted, #52525b);">analista</text>
+    <rect x="40" y="420" width="250" height="166" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 2.5;"/>
+    <rect x="40" y="420" width="250" height="58" rx="16" style="fill: var(--fig-muted, #52525b);"/>
+    <rect x="40" y="454" width="250" height="24" style="fill: var(--fig-muted, #52525b);"/>
+    <text x="165" y="460" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: #ffffff;">Descartada</text>
+    <text x="165" y="512" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">queda registrado</text>
+    <text x="165" y="540" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">quién, cuándo</text>
+    <text x="165" y="568" text-anchor="middle" style="font-size: 20px; fill: var(--fig-ink, #1b365d);">y por qué</text>
   </g>
 </svg>

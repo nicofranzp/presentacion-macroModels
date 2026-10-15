@@ -1,78 +1,134 @@
-<svg viewBox="0 0 1600 740" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Las cinco partes de la plataforma y cómo se conectan" style="font-family: inherit;">
+<svg viewBox="0 0 1600 740" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Las partes de la plataforma y cómo se conectan" style="font-family: inherit;">
   <defs>
     <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" style="fill: var(--fig-muted, #52525b);"/>
     </marker>
   </defs>
 
-  <!-- 0: data store (visible from the start) -->
+  <!-- Cards: a coloured header with the name and where it lives (pill),
+       a role line, then contents. Navy = versioned code repository,
+       gold = the platform's data and records, grey = outside the platform. -->
+
+  <!-- 0: the two data sources (visible from the start) -->
   <g>
-    <rect x="40" y="440" width="660" height="260" rx="14" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
-    <text x="370" y="494" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModelPlataform_data</text>
-    <text x="370" y="540" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Almacén de datos: solo se agrega (hoy git, provisorio)</text>
-    <text x="370" y="580" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">sources/ (BDE, IPoM, comprados, legacy)</text>
-    <text x="370" y="616" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">models/&lt;M&gt;/ vintages · tendencias · outputs</text>
-    <text x="370" y="652" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">review/ · official/</text>
+    <rect x="40" y="440" width="360" height="260" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-muted, #52525b); stroke-width: 2.5;"/>
+    <rect x="40" y="440" width="360" height="66" rx="16" style="fill: var(--fig-muted, #52525b);"/>
+    <rect x="40" y="480" width="360" height="26" style="fill: var(--fig-muted, #52525b);"/>
+    <text x="68" y="485" style="font-size: 32px; font-weight: 700; fill: #ffffff;">Public Data</text>
+    <rect x="306" y="455" width="70" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="341" y="480" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">API</text>
+    <text x="68" y="550" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Fuentes públicas</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="68" y="592">BDE · CMF</text>
+      <text x="68" y="630">fuera de la plataforma</text>
+    </g>
+
+    <rect x="440" y="440" width="420" height="260" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="440" y="440" width="420" height="66" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="440" y="480" width="420" height="26" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="468" y="485" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Data Store</text>
+    <rect x="726" y="455" width="110" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="781" y="480" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">Disco N:</text>
+    <text x="468" y="550" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Solo se agrega</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="468" y="592">datos internos o clasificados</text>
+      <text x="468" y="630">vintages · tendencias</text>
+      <text x="468" y="668">resultados publicados</text>
+    </g>
   </g>
 
-  <!-- 1: pipelines, fed by the store -->
+  <!-- 1: data pipelines, fed by both sources -->
   <g class="frag" data-fragment-index="1">
-    <rect x="40" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="270" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_dataPipelines</text>
-    <text x="270" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Una definición JSON por observable</text>
-    <text x="270" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">conectores · transformaciones</text>
-    <text x="270" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">snapshots · nowcast · vintages</text>
-    <line x1="270" y1="438" x2="270" y2="246" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
-    <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">
-      <text x="250" y="334" text-anchor="end">fuentes,</text>
-      <text x="250" y="364" text-anchor="end">vintages DAPM</text>
+    <rect x="40" y="40" width="420" height="230" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="40" y="40" width="420" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="40" y="80" width="420" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="68" y="85" style="font-size: 32px; font-weight: 700; fill: #ffffff;">Data Pipelines</text>
+    <rect x="316" y="55" width="120" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="376" y="80" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">GitHub</text>
+    <text x="68" y="150" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Construye cada observable</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="68" y="192">una definición JSON por serie</text>
+      <text x="68" y="230">conectores · transformaciones</text>
+    </g>
+    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
+      <line x1="220" y1="438" x2="220" y2="276" marker-end="url(#arch-arrow)"/>
+      <line x1="560" y1="438" x2="420" y2="276" marker-end="url(#arch-arrow)"/>
+    </g>
+    <g style="font-size: 21px; font-style: italic; fill: var(--fig-ink, #1b365d);">
+      <text x="204" y="346" text-anchor="end">datos</text>
+      <text x="204" y="376" text-anchor="end">públicos</text>
+      <text x="512" y="346">datos</text>
+      <text x="512" y="376">internos</text>
     </g>
   </g>
 
   <!-- 2: models -->
   <g class="frag" data-fragment-index="2">
-    <rect x="570" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="800" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_models</text>
-    <text x="800" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Versiones de modelo inmutables</text>
-    <text x="800" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">vendor/ → main_run.m → dist/</text>
-    <text x="800" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">MAFIN · SW2007 · XMAS · MSEB</text>
-  </g>
-
-  <!-- 3: back end -->
-  <g class="frag" data-fragment-index="3">
-    <rect x="1100" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
-    <text x="1330" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_backEnd</text>
-    <text x="1330" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Orquestación sin estado</text>
-    <text x="1330" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">conj. de información · ejecuciones</text>
-    <text x="1330" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">análisis · gobernanza · publicación</text>
-  </g>
-
-  <!-- 4: workspace, where the three repositories meet -->
-  <g class="frag" data-fragment-index="4">
-    <rect x="900" y="440" width="660" height="260" rx="14" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
-    <text x="1230" y="494" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Workspace (uno por analista)</text>
-    <text x="1230" y="540" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">exercises/&lt;name&gt;/&lt;name&gt;.m</text>
-    <text x="1230" y="580" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">runtime/: snapshots, conj. de información,</text>
-    <text x="1230" y="616" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">ejecuciones, corridas de ejercicios</text>
-    <text x="1230" y="652" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">secure/: confidencial, nunca versionado</text>
-    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
-      <line x1="470" y1="244" x2="1010" y2="434" marker-end="url(#arch-arrow)"/>
-      <line x1="900" y1="244" x2="1140" y2="434" marker-end="url(#arch-arrow)"/>
-      <line x1="1400" y1="244" x2="1400" y2="434" marker-end="url(#arch-arrow)"/>
+    <rect x="1140" y="40" width="420" height="230" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="1140" y="40" width="420" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="1140" y="80" width="420" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="1168" y="85" style="font-size: 32px; font-weight: 700; fill: #ffffff;">Models</text>
+    <rect x="1416" y="55" width="120" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="1476" y="80" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">GitHub</text>
+    <text x="1168" y="150" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Versiones inmutables</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="1168" y="192">originales + versión publicada</text>
+      <text x="1168" y="230">varios modelos y sus versiones</text>
     </g>
+  </g>
+
+  <!-- 3: back end, in the middle: pipelines and models feed it -->
+  <g class="frag" data-fragment-index="3">
+    <rect x="590" y="40" width="420" height="230" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="590" y="40" width="420" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="590" y="80" width="420" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="618" y="85" style="font-size: 32px; font-weight: 700; fill: #ffffff;">Back End</text>
+    <rect x="866" y="55" width="120" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="926" y="80" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">GitHub</text>
+    <text x="618" y="150" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Orquesta y gobierna</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="618" y="192">set de información · ejecuciones</text>
+      <text x="618" y="230">análisis · revisión · publicación</text>
+    </g>
+    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
+      <line x1="462" y1="190" x2="584" y2="190" marker-end="url(#arch-arrow)"/>
+      <line x1="1138" y1="190" x2="1016" y2="190" marker-end="url(#arch-arrow)"/>
+    </g>
+    <g style="font-size: 21px; font-style: italic; fill: var(--fig-ink, #1b365d);">
+      <text x="525" y="146" text-anchor="middle">datos</text>
+      <text x="525" y="172" text-anchor="middle">procesados</text>
+      <text x="1075" y="146" text-anchor="middle">modelo</text>
+      <text x="1075" y="172" text-anchor="middle">publicado</text>
+    </g>
+  </g>
+
+  <!-- 4: workspace, where the back end runs each exercise -->
+  <g class="frag" data-fragment-index="4">
+    <rect x="1060" y="440" width="500" height="260" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="1060" y="440" width="500" height="66" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="1060" y="480" width="500" height="26" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="1088" y="485" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Workspace</text>
+    <rect x="1436" y="455" width="100" height="36" rx="18" style="fill: var(--fig-bg, #fff);"/>
+    <text x="1486" y="480" text-anchor="middle" style="font-size: 20px; font-weight: 600; fill: var(--fig-brand, #1b365d);">Local</text>
+    <text x="1088" y="550" style="font-size: 25px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Uno por analista</text>
+    <g style="font-size: 22px; fill: var(--fig-muted, #52525b);">
+      <text x="1088" y="592">exercises/: cada ejercicio, un m-file</text>
+      <text x="1088" y="630">runtime/: registros de cada corrida</text>
+      <text x="1088" y="668">secure/: confidencial, sin versionar</text>
+    </g>
+    <line x1="900" y1="274" x2="1180" y2="434" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
     <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d); paint-order: stroke; stroke: var(--fig-bg, #fff); stroke-width: 10px; stroke-linejoin: round;">
-      <text x="600" y="276" text-anchor="middle">snapshot de datos</text>
-      <text x="1050" y="320" text-anchor="middle">bundle dist/</text>
-      <text x="1384" y="350" text-anchor="end">Exercise · Revision</text>
+      <text x="1056" y="352">corre y registra</text>
+      <text x="1056" y="380">cada ejercicio</text>
     </g>
   </g>
 
   <!-- 5: workspace publishes back to the store -->
   <g class="frag" data-fragment-index="5">
-    <line x1="898" y1="600" x2="706" y2="600" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <line x1="1058" y1="600" x2="866" y2="600" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
     <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">
-      <text x="802" y="586" text-anchor="middle">freeze · promote</text>
-      <text x="802" y="632" text-anchor="middle">publish_vintage</text>
+      <text x="962" y="586" text-anchor="middle">publica</text>
+      <text x="962" y="632" text-anchor="middle">resultados</text>
     </g>
   </g>
 </svg>

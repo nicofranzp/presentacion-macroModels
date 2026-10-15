@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1600 520" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Qué se gobierna: la revisión del ejercicio y la sensibilidad de cada dato" style="font-family: inherit;">
+  <!-- Left: what a decision is about. Right: the sensitivity ladder,
+       lowest to highest, each level with an example origin. -->
+
+  <g class="frag" data-fragment-index="1">
+    <rect x="40" y="20" width="700" height="480" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 2.5;"/>
+    <rect x="40" y="20" width="700" height="66" rx="16" style="fill: var(--fig-brand, #1b365d);"/>
+    <rect x="40" y="60" width="700" height="26" style="fill: var(--fig-brand, #1b365d);"/>
+    <text x="68" y="64" style="font-size: 30px; font-weight: 700; fill: #ffffff;">La revisión del ejercicio</text>
+    <circle cx="80" cy="141" r="9" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="104" y="150" style="font-size: 26px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Un conjunto, no una ejecución</text>
+    <text x="104" y="188" style="font-size: 23px; fill: var(--fig-muted, #52525b);">base, escenarios y análisis se deciden juntos</text>
+    <circle cx="80" cy="259" r="9" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="104" y="268" style="font-size: 26px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Todo queda congelado</text>
+    <text x="104" y="306" style="font-size: 23px; fill: var(--fig-muted, #52525b);">los datos, sets de información y ejecuciones que usa</text>
+    <circle cx="80" cy="377" r="9" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="104" y="386" style="font-size: 26px; font-weight: 700; fill: var(--fig-ink, #1b365d);">Tres roles</text>
+    <text x="104" y="424" style="font-size: 23px; fill: var(--fig-muted, #52525b);">analista, jefatura y Consejo: sin el rol, se rechaza</text>
+  </g>
+
+  <g class="frag" data-fragment-index="2">
+    <rect x="800" y="20" width="760" height="480" rx="16" style="fill: var(--fig-bg, #fff); stroke: var(--fig-accent, #bf9c69); stroke-width: 2.5;"/>
+    <rect x="800" y="20" width="760" height="66" rx="16" style="fill: var(--fig-accent, #bf9c69);"/>
+    <rect x="800" y="60" width="760" height="26" style="fill: var(--fig-accent, #bf9c69);"/>
+    <text x="828" y="64" style="font-size: 30px; font-weight: 700; fill: var(--fig-brand, #1b365d);">La sensibilidad de cada dato</text>
+    <rect x="828" y="128" width="200" height="56" rx="28" style="fill: var(--fig-brand, #1b365d); fill-opacity: 1;"/>
+    <text x="928" y="165" text-anchor="middle" style="font-size: 23px; font-weight: 700; fill: #ffffff;">IAS</text>
+    <text x="1052" y="165" style="font-size: 22px; fill: var(--fig-ink, #1b365d);">proyección institucional no publicada</text>
+    <rect x="828" y="202" width="200" height="56" rx="28" style="fill: var(--fig-brand, #1b365d); fill-opacity: 0.8;"/>
+    <text x="928" y="239" text-anchor="middle" style="font-size: 23px; font-weight: 700; fill: #ffffff;">Confidencial</text>
+    <text x="1052" y="239" style="font-size: 22px; fill: var(--fig-ink, #1b365d);">juicio y supuestos</text>
+    <rect x="828" y="276" width="200" height="56" rx="28" style="fill: var(--fig-brand, #1b365d); fill-opacity: 0.45;"/>
+    <text x="928" y="313" text-anchor="middle" style="font-size: 23px; font-weight: 700; fill: #ffffff;">Interno</text>
+    <text x="1052" y="313" style="font-size: 22px; fill: var(--fig-ink, #1b365d);">datos comprados, historia de la HD</text>
+    <rect x="828" y="350" width="200" height="56" rx="28" style="fill: var(--fig-brand, #1b365d); fill-opacity: 0.18;"/>
+    <text x="928" y="387" text-anchor="middle" style="font-size: 23px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Público</text>
+    <text x="1052" y="387" style="font-size: 22px; fill: var(--fig-ink, #1b365d);">fuentes públicas</text>
+    <text x="828" y="458" style="font-size: 22px; font-style: italic; fill: var(--fig-muted, #52525b);">Un resultado es tan sensible como su insumo más sensible.</text>
+  </g>
+</svg>

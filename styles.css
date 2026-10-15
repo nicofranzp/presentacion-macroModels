@@ -1,0 +1,12 @@
+/* Deck-level overrides; the theme itself lives in _extensions/quarto-reveal-theme. */
+
+/* Slide titles are full-sentence messages: split long ones into two even
+   lines instead of leaving a word or two alone on the second. */
+/* .reveal h2 {
+  text-wrap: balance;
+} */
+
+/* Top-align column content: headings and lists stay together. */
+.reveal div.column {
+  justify-content: flex-start;
+}

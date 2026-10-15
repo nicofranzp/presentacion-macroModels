@@ -1,0 +1,78 @@
+<svg viewBox="0 0 1600 740" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Las cinco partes de la plataforma y cómo se conectan" style="font-family: inherit;">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill: var(--fig-muted, #52525b);"/>
+    </marker>
+  </defs>
+
+  <!-- 0: data store (visible from the start) -->
+  <g>
+    <rect x="40" y="440" width="660" height="260" rx="14" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
+    <text x="370" y="494" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModelPlataform_data</text>
+    <text x="370" y="540" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Almacén de datos: solo se agrega (hoy git, provisorio)</text>
+    <text x="370" y="580" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">sources/ (BDE, IPoM, comprados, legacy)</text>
+    <text x="370" y="616" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">models/&lt;M&gt;/ vintages · tendencias · outputs</text>
+    <text x="370" y="652" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">review/ · official/</text>
+  </g>
+
+  <!-- 1: pipelines, fed by the store -->
+  <g class="frag" data-fragment-index="1">
+    <rect x="40" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
+    <text x="270" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_dataPipelines</text>
+    <text x="270" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Una definición JSON por observable</text>
+    <text x="270" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">conectores · transformaciones</text>
+    <text x="270" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">snapshots · nowcast · vintages</text>
+    <line x1="270" y1="438" x2="270" y2="246" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">
+      <text x="250" y="334" text-anchor="end">fuentes,</text>
+      <text x="250" y="364" text-anchor="end">vintages DAPM</text>
+    </g>
+  </g>
+
+  <!-- 2: models -->
+  <g class="frag" data-fragment-index="2">
+    <rect x="570" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
+    <text x="800" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_models</text>
+    <text x="800" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Versiones de modelo inmutables</text>
+    <text x="800" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">vendor/ → main_run.m → dist/</text>
+    <text x="800" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">MAFIN · SW2007 · XMAS · MSEB</text>
+  </g>
+
+  <!-- 3: back end -->
+  <g class="frag" data-fragment-index="3">
+    <rect x="1100" y="40" width="460" height="200" rx="14" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
+    <text x="1330" y="92" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">macroModels_backEnd</text>
+    <text x="1330" y="138" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">Orquestación sin estado</text>
+    <text x="1330" y="174" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">conj. de información · ejecuciones</text>
+    <text x="1330" y="208" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">análisis · gobernanza · publicación</text>
+  </g>
+
+  <!-- 4: workspace, where the three repositories meet -->
+  <g class="frag" data-fragment-index="4">
+    <rect x="900" y="440" width="660" height="260" rx="14" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
+    <text x="1230" y="494" text-anchor="middle" style="font-size: 32px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Workspace (uno por analista)</text>
+    <text x="1230" y="540" text-anchor="middle" style="font-size: 24px; fill: var(--fig-ink, #1b365d);">exercises/&lt;name&gt;/&lt;name&gt;.m</text>
+    <text x="1230" y="580" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">runtime/: snapshots, conj. de información,</text>
+    <text x="1230" y="616" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">ejecuciones, corridas de ejercicios</text>
+    <text x="1230" y="652" text-anchor="middle" style="font-size: 24px; fill: var(--fig-muted, #52525b);">secure/: confidencial, nunca versionado</text>
+    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
+      <line x1="470" y1="244" x2="1010" y2="434" marker-end="url(#arch-arrow)"/>
+      <line x1="900" y1="244" x2="1140" y2="434" marker-end="url(#arch-arrow)"/>
+      <line x1="1400" y1="244" x2="1400" y2="434" marker-end="url(#arch-arrow)"/>
+    </g>
+    <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d); paint-order: stroke; stroke: var(--fig-bg, #fff); stroke-width: 10px; stroke-linejoin: round;">
+      <text x="600" y="276" text-anchor="middle">snapshot de datos</text>
+      <text x="1050" y="320" text-anchor="middle">bundle dist/</text>
+      <text x="1384" y="350" text-anchor="end">Exercise · Revision</text>
+    </g>
+  </g>
+
+  <!-- 5: workspace publishes back to the store -->
+  <g class="frag" data-fragment-index="5">
+    <line x1="898" y1="600" x2="706" y2="600" marker-end="url(#arch-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <g style="font-size: 22px; font-style: italic; fill: var(--fig-ink, #1b365d);">
+      <text x="802" y="586" text-anchor="middle">freeze · promote</text>
+      <text x="802" y="632" text-anchor="middle">publish_vintage</text>
+    </g>
+  </g>
+</svg>

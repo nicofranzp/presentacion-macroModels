@@ -1,0 +1,499 @@
+---
+title: "Plataforma de Modelos Macro"
+subtitle: "Modelos, masaje de datos, cocina y gobernanza institucional"
+author: "Nicolas Franz-Pattillo"
+date: today
+lang: es
+date-format: long
+format:
+  quarto-reveal-theme-revealjs:
+    institution: bcch
+    theme-mode: light
+    slide-number: c/t
+    toc: true
+    distribute: true
+    css: styles.css
+---
+
+## Sin registros, una proyección no se puede explicar ni reproducir: la memoria es frágil
+
+Una proyección combina un modelo, datos, proyecciones externas y juicios. Si esas piezas no quedan registradas juntas, preguntas básicas no tienen una respuesta segura:
+
+- ¿Con qué **datos**, qué **versión del modelo** y qué **supuestos** se hizo en esta proyección?
+- ¿Podemos comparar proyecciones anteriores con modelos nuevos?
+- Si la proyección cambió desde la ronda anterior, ¿fue por **información nueva** o por **supuestos nuevos**?
+- ¿Se puede **reproducir** hoy un número publicado hace meses? ¿Que pasa si los miembros del equipo cambian?
+- ¿**Quién** aprobó la proyección, y **qué versión** exactamente?
+- Cuanto nos cuesta contestar las preguntas anteriores?
+
+::: {.fragment}
+En medio del proceso, el apuro deja los pasos sin registrar y quedan solo en la memoria de quienes los dieron. ¿Quién recuerda hoy qué se decidió en 2019, y por qué?
+:::
+
+::: {.fragment .center}
+**Sin memoria institucional, no hay forma de aprender de las rondas anteriores.**
+:::
+
+## Una plataforma convierte cada ronda en registros verificables
+
+Con esos registros, cada ronda es:
+
+- **Reproducible**: cada número se puede reconstruir desde los repositorios y los registros de la corrida
+- **Trazable**: cada resultado indica qué versión del modelo, vintage de datos, tendencias y supuestos lo produjeron
+- **Gobernada**: una proyección es oficial solo mediante decisiones registradas por roles identificados
+- **Solo se agrega**: nada publicado se edita; una corrección es un registro nuevo
+
+::: {.fragment .center}
+*Nada de esto debería ser carga extra para los analistas o managers!*
+:::
+
+## El objetivo de esta presentación es mostrar una arquitectura que permita hacer lo anterior
+
+- Los datos tienen un ciclo de vida que es distinto al de los modelos y al de las desiciones de política.
+- Cualquier sistema que intente mezclar lo anterior sin considerar los ciclos de vida esta destinado al fracazo.
+- Flexibilidad y trazabilidad son sustitutos sólo cuando el sistema de trabajo los define asi.
+
+## Agenda
+
+::: {#toc}
+:::
+
+# Arquitectura
+
+## Cinco partes con una función cada una: el código nunca guarda datos
+
+::: {.svg-fragment src="src/svg/architecture.svg"}
+:::
+
+## Cada parte tiene límites estrictos sobre lo que puede contener
+
+| Parte | Contiene | **No** debe contener |
+|---|---|---|
+| `macroModels_models` | versiones de modelos: archivos originales + bundle `dist/` publicado | datos, credenciales, resultados de ejecución |
+| `macroModels_dataPipelines` | cómo se construye cada observable (definiciones JSON, conectores, transformaciones) | los datos mismos, `secrets.env` |
+| `macroModels_backEnd` | orquestación: ejercicios, conjuntos de información, ejecuciones, análisis, gobernanza | modelos, datos, cualquier resultado analítico |
+| Workspace | los m-files del analista y `runtime/` (los registros de cada corrida) | nada compartido; es local y no versionado |
+| `macroModelPlataform_data` (provisorio) | fuentes, vintages, tendencias, resultados publicados, copias en revisión y oficiales | código; nada reescrito |
+
+: {.striped}
+
+::: {.notes}
+El código vive en tres repositorios git y nunca contiene datos. Los registros viven en el workspace (privado, hasta que se congela) y en el almacén de datos (compartido, solo se agrega).
+:::
+
+## Cada repositorio cambia a su propio ritmo, y cada corrida registra la versión de cada uno
+
+| Repositorio | Cambia cuando… | Su versión queda registrada como |
+|---|---|---|
+| `macroModels_models` | se publica una versión nueva de un modelo | carpeta inmutable por versión (`0.0.0`, `1.0.0`…) y hash del bundle `dist/` |
+| `macroModels_dataPipelines` | cambia una fuente o cómo se construye un observable | commit, y el SHA-256 de cada definición dentro de cada vintage |
+| `macroModels_backEnd` | cambia la plataforma: funciones, análisis, gobernanza | commit registrado en cada corrida (`run_provenance`) |
+| `macroModelPlataform_data` (provisorio) | en cada publicación: vintage, tendencias, `freeze`, `promote` | hoy, un commit por publicación; solo se agrega |
+
+: {.striped}
+
+::: {.fragment}
+**Por qué separados:** cada uno tiene un ciclo de vida distinto, la procedencia se descompone por pieza (resultado = hash del back end + del modelo + del pipeline), y los datos confidenciales quedan bajo su propio control de acceso, lejos del código.
+:::
+
+## El código se versiona en git; los resultados, por el hash de su contenido
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### Código (git)
+
+- Tres repositorios, cada uno versionado por separado
+- Cada corrida registra el commit de cada repositorio y si tenía cambios sin commit, además de las versiones de MATLAB y Dynare (`run_provenance`)
+- Solo MATLAB y Dynare; nada de Python
+
+:::
+
+::: {.column width="50%"}
+
+### Registros (identificados por hash)
+
+- Conjuntos de información y ejecuciones: id = SHA-256 de su contenido
+- Mismos insumos → mismo id → se **reutiliza**, así que volver a correr es barato
+- Cualquier cambio en datos, supuestos o modelo → un registro **nuevo**
+- Nada publicado contiene rutas de una máquina
+
+:::
+
+:::
+
+# Modelos
+
+## Una versión publicada nunca cambia: un cambio es una versión nueva
+
+::: {.columns}
+
+::: {.column width="45%"}
+
+```text
+models/<MODEL>/<version>/
+├── vendor/      archivos originales, tal como llegaron
+│   ├── MAFIN.mod, *.inc, steadystate.m
+│   ├── estimation.mat (archivo de moda)
+│   ├── model_metadata.json
+│   ├── data_pipelines.csv
+│   ├── endogenous_meta.csv
+│   ├── exogenous_meta.csv
+│   └── exogenous_groups.json
+├── main_run.m   construye dist/ desde vendor/
+└── dist/        el bundle publicado
+```
+
+:::
+
+::: {.column width="55%"}
+
+- `vendor/` guarda lo recibido; todo lo derivado va a `dist/`
+- `dist/`: `.mod` expandido, `model.json`, `observables.csv`, parámetros, estado estacionario, registros de variables, grupos de shocks, IRF
+- `bundle_manifest.csv`: SHA-256 por archivo. El back end identifica la versión por ese **hash de contenido**, así que un bundle modificado nunca pasa por el original
+- Versiones semánticas; una versión publicada **nunca se edita**: un cambio es una versión nueva con `lineage.parent` y `change_summary`
+
+:::
+
+:::
+
+## Un modelo entra a la plataforma solo si cumple un contrato mínimo
+
+::: {.nonincremental}
+
+- `varobs` consistente con `observables.csv`: cada observable con su error de medida y el **pipeline** que lo construye (`TBD` impide actualizar sus datos)
+- Estimación con `mode_compute=0`, `smoother` y un archivo de moda: el back end corre el suavizador de Kalman sobre los datos del ejercicio
+- Grupos de shocks que cubran **cada shock exactamente una vez** (para la descomposición histórica)
+- Para contrafactuales de política: los parámetros de la regla y el shock de política (MAFIN: `ALPHA_ppi`, `ALPHA_R`, `ALPHA_y`, `u_e_m`)
+
+:::
+
+| MAFIN | Qué es |
+|---|---|
+| 0.0.0 | el modelo en uso (25 observables) |
+| 0.1.0 | + CCyB observado (`ccyb`, `u_ccyb`) para contrafactuales macroprudenciales |
+| 1.0.0, 2.0.0 | especificaciones posteriores; 2.0.0 separa la inversión y agrega CET1 |
+
+## Publicar una versión nueva toma cinco pasos verificables
+
+1. Crear `models/<MODEL>/<nueva>/vendor/`, completar `model_metadata.json` (versión padre, resumen del cambio), los CSV de metadatos, `data_pipelines.csv`, `exogenous_groups.json`
+2. Correr `main_run.m`: Dynare en `tmp/`, registros de variables, `dist/`
+3. `validate_bundle(dist)`: estructura, hashes, grupos, manifiesto
+4. Commit y push; reindexar con `orchestrate_models`
+5. `check_data_updatable(...)`: cada observable tiene un pipeline antes de usar la versión para proyectar
+
+# Pipelines de datos
+
+## Cada observable se construye con un pipeline declarado, no a mano
+
+::: {.svg-fragment src="src/svg/pipeline-flow.svg"}
+:::
+
+- Un **pipeline por observable**: un archivo JSON que dice de dónde vienen las series fuente y qué pasos construyen el observable
+- Los pipelines se pueden anidar: un insumo con proveedor `definitions` es el resultado de otro pipeline
+- Las variantes de proyección IPoM reutilizan los pasos de un observable con insumos del IPoM (`extends`, `input_overrides`)
+
+## Una definición es un archivo versionado: todo cambio queda registrado
+
+::: {.columns}
+
+::: {.column width="55%"}
+
+```json
+{
+  "id": "credit_corporate_qoq_growth",
+  "unit": "percent",
+  "semanticVariable": "CREDIT_CORPORATE",
+  "inputs": [{
+    "id": "credit_corporate_bde",
+    "provider": "bde",
+    "connection": { "series": "F022.COMBI.STO.Z.Z.CLP.M" }
+  }],
+  "transformations": [
+    { "operation": "resample",
+      "parameters": { "frequency": "quarterly",
+                      "aggregation": "last" } },
+    { "operation": "growth",
+      "parameters": { "lag": 1, "scale": 100 } }
+  ]
+}
+```
+
+:::
+
+::: {.column width="45%"}
+
+- **Las definiciones son datos**: se cambian por commit, nunca en tiempo de ejecución
+- Se validan contra `schemas/`; la batería de tests rechaza una que falle
+- El **SHA-256** de cada definición queda en cada vintage que la usa: una definición modificada aparece en la procedencia de los datos
+- Los pasos siempre corren las transformaciones de este repositorio
+
+:::
+
+:::
+
+## Ningún observable entra sin compararse con una fuente confiable
+
+1. Escribir la definición en su grupo (`id`, `unit`, `semanticVariable`, `inputs`, `transformations`)
+2. Correrla y **compararla con una fuente confiable** (DAPM, un cuadro publicado) en el período común; registrar salvedades en `metadata.caveats` o `docs/`
+3. Asociarla al modelo: `observables.csv` de la versión y `mafin_observables.csv`
+4. Correr los tests (`DefinitionsValidateTest`)
+5. Commit
+
+# Back end
+
+## Cada resultado se puede rastrear hasta sus datos, supuestos y modelo
+
+::: {.svg-fragment src="src/svg/record-chain.svg"}
+:::
+
+## El conjunto de información separa lo observado de lo supuesto
+
+| Componente | Viene de | Tipo |
+|---|---|---|
+| `observed` | el snapshot de datos, asociado a los observables del modelo | información |
+| `external_forecasts` | IPoM, AR de corto plazo, otras fuentes | información |
+| `external_constraints` | trayectorias de condicionamiento elegidas por el analista | supuesto |
+| `judgment_overlays` | ajustes `replace` / `add` | supuesto |
+
+: {.striped}
+
+- Cada supuesto lleva una **justificación** y un **autor**
+- `diff_information_sets(a, b)` separa *información nueva* de *supuestos nuevos*: ¿por qué se movió la proyección?
+
+## Todo el ejercicio se declara en un m-file y corre con `ex.run()`
+
+```matlab
+ex = Exercise("MAFIN_December2026", reference="December2026");
+ex.model("MAFIN", "0.0.0");
+parent = "MAFIN_Vintage_October2026/20261007_171514";
+ex.revision_of(parent, "information_update", "Nuevas cuentas nacionales e IPoM de diciembre.");
+ex.data(trim=true, force=false);
+ex.nowcast(frequencies=["monthly" "daily"]);
+ex.source("ipom", "ipom", vintage="latest");
+ex.trends("20260923");
+ex.scenario("baseline", layers=["nowcast" "ipom"]);
+ex.scenario("weaker_credit", base="baseline");
+why = "Encuesta de crédito bancario.";
+ex.judgement("weaker_credit", "credit_corporate_qoq_growth", quarter="2026Q4", mode="add", value=-0.5, rationale=why);
+rev = ex.run();        % una revisión guardada; ex.explore() para una corrida de prueba
+```
+
+- `run()` escribe `exercise.json`, archiva el m-file y corre datos → fuentes → tendencias → escenarios → análisis → publicaciones
+- Los escenarios apilan **capas** (la última prevalece); `precedence` las reordena por variable y trimestre
+
+## El back end explica por qué cambia una proyección, no solo cuánto
+
+| Análisis | Pregunta |
+|---|---|
+| `source_effect` | ¿qué aporta el IPoM (o cualquier fuente) a la proyección? |
+| `revision` | ¿por qué cambió la proyección desde la ronda anterior? datos anteriores → revisiones de datos → datos nuevos → nowcast → actual |
+| contrafactual de política | la misma economía con otra trayectoria o regla de política |
+| proyección condicional | si las tasas resultan más bajas (metas duras o blandas, shocks conocidos), ¿qué más es probablemente cierto? |
+| fan charts | incertidumbre de los shocks futuros, dados los datos, el nowcast y la proyección externa |
+
+: {.striped}
+
+Resultados: descomposición histórica (HD), proyecciones e IRF en el formato de la app; el reporte HD (plantilla IEF); cualquier serie a pedido con `rev.table` / `rev.export`.
+
+# Cómo deben tratarse los datos
+
+## Los datos se agregan, nunca se reescriben
+
+::: {.nonincremental}
+
+- **Agregar, nunca reescribir.** Vintages, versiones de tendencias, resultados publicados y copias en revisión u oficiales no se editan. Una corrección es un vintage, versión o conjunto de resultados nuevo, con una nota que dice qué corrige
+- **Commit después de cada publicación** (`publish_vintage`, `freeze`, `decide`, `promote`, `revise_trends`): mientras el almacén sea un repositorio git, su historia es la pista de auditoría
+- **Nunca editar a mano** archivos en `runtime/` ni en `review/`, `official/`, vintages o tendencias del almacén
+- **Fijar lo que se usa**: un vintage con fecha, una versión de tendencias, una ronda IPoM. `latest` se resuelve y queda registrado en el manifiesto
+- **Lo confidencial queda fuera de git**: credenciales solo en `secrets.env`, insumos restringidos en `secure/` del workspace, ninguna ruta de máquina en lo publicado
+- **Los datos fuente malos se declaran, no se borran**: `ex.unobserved(variable, from, to, rationale)`
+
+:::
+
+## Las proyecciones se guardan sin tendencia y se muestran con ella
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### Dos sistemas de unidades
+
+- **Unidades del pipeline**: lo que produce el pipeline (p. ej. % t/t, nominal)
+- **Unidades del modelo** = unidades del pipeline − tendencia
+- Las proyecciones se guardan en unidades del modelo; las series que se muestran están en unidades del pipeline (modelo + tendencia)
+- El juicio va en unidades del pipeline, solo en trimestres proyectados
+
+:::
+
+::: {.column width="50%"}
+
+### Series derivadas
+
+- Se construyen con pasos de pipeline, nunca a mano: crédito real (`substract` IPC subyacente), crédito en UF (`deflate`: exacto, (1+a)/(1+b)−1)
+- Series auxiliares que ningún modelo observa (la UF): observadas por un pipeline, proyectadas por otro, tal como se conocían en la fecha de la corrida
+
+:::
+
+:::
+
+## Las tendencias son decisiones institucionales, no datos
+
+- Ejemplos: crecimiento potencial, tasa neutral, meta de inflación
+- Cada versión de tendencias registra su versión padre, la decisión (quién, rol, fecha, referencia) y, por serie revisada, el mayor cambio, el primer trimestre modificado y la justificación
+- Los ejercicios fijan una versión: `ex.trends("20260923")`
+
+```matlab
+decision = struct('by', "Consejo", 'role', "board", 'date', "2026-12-15", 'reference', "IPoM diciembre 2026, recuadro III.2");
+why = struct('R_obs', "Tasa neutral revisada a 4,0%.");
+revise_trends("MAFIN", "20260923", new_trends, decision, why);
+```
+
+## No todo vintage sirve a toda versión del modelo
+
+- Un vintage sirve a una versión del modelo solo si tiene **todos los observables** de esa versión (datos y tendencia)
+- Una agrupación de shocks calza con una versión solo si cubre sus shocks **exactamente una vez**
+- `check_store_compatibility("MAFIN")` reconstruye `compatibility.json`; un ejercicio **se niega a correr** si a las tendencias les falta un observable
+
+| Vintage | Versiones de MAFIN a las que sirve |
+|---|---|
+| todos los vintages | 0.0.0 |
+| 20260511 | 0.0.0, 0.1.0 |
+| 20260923 | 0.0.0, 1.0.0, 2.0.0 (a 0.1.0 le falta `ccyb`) |
+
+# Gobernanza
+
+## Se gobierna la revisión del ejercicio, nunca una ejecución aislada
+
+- Las decisiones evalúan conclusiones construidas con varias ejecuciones (escenario base, escenarios, análisis)
+- Ejecuciones, conjuntos de información y vintages quedan congelados porque una revisión congelada los referencia
+- Tres roles: **analista** (`analyst`), **jefatura** (`manager`), **Consejo** (`board`), definidos en `governance/roles.json`; se rechaza la decisión de alguien sin el rol
+- Los registros son JSON simples junto a la revisión; el almacén oficial es, por ahora, el repositorio `macroModelPlataform_data`
+
+## Una proyección es oficial solo tras decisiones de jefatura y Consejo
+
+::: {.svg-fragment src="src/svg/lifecycle.svg"}
+:::
+
+## Cualquier alteración del registro de decisiones se detecta
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+```json
+{
+  "event": 2,
+  "revision_id": "20261007_093012",
+  "from": "review_snapshot",
+  "to": "approved_revision",
+  "actor": {"name": "J. Perez", "role": "manager"},
+  "timestamp": "2026-10-08T14:00:00Z",
+  "note": "Reunión de proyecciones del 2026-10-08.",
+  "revision_hash": "<sha256 de revision.json>",
+  "previous_event_hash": "<sha256 del evento 0001>"
+}
+```
+
+:::
+
+::: {.column width="50%"}
+
+- Un archivo numerado por evento, nunca editado
+- `previous_event_hash` encadena los eventos: cualquier edición rompe la cadena
+- La etapa es el `to` del último evento; no hay un campo de estado que pueda desalinearse
+- `revision_hash` fija exactamente lo que se revisó
+
+:::
+
+:::
+
+## Cada conclusión queda atada a los números que la respaldan
+
+```matlab
+july = rev.evidence("revision", step="previous_round", series="gam_lf_real", quarter="2026Q4", label="Ronda de julio");
+now  = rev.evidence("revision", step="current", series="gam_lf_real", quarter="2026Q4", label="Ronda actual");
+rev.conclude("credit", "El crecimiento del crédito comercial real para 2026T4 se revisa al alza.", [july now]);
+rev.record_conclusions();
+```
+
+- Cada evidencia guarda su **valor y el hash del archivo**
+- Después, cualquiera puede verificar que los números detrás de un mensaje no cambiaron
+
+## Cinco llamadas llevan una ronda del analista al almacén oficial
+
+```matlab
+rev.freeze("Ronda de diciembre para revisión.");                                  % analista
+rev.decide("approved_revision", "J. Perez", "manager", "Reunión de proyecciones del 2026-12-10.");
+rev.decide("official_revision", "Consejo", "board", "Sesión de Consejo del 2026-12-15.");
+rev.promote();          % copia a official/ (HD compacta: 16,8 MB → 0,8 MB)
+rev.publish_vintage();  % vintage, HD y proyecciones al almacén de datos
+```
+
+| Estado | Dónde | Significado |
+|---|---|---|
+| guardado | `runtime/` | se conserva hasta que se descarta o nadie lo usa |
+| congelado | `runtime/`, referenciado por una revisión congelada | nunca se borra ni se reescribe |
+| oficial | hoy `macroModelPlataform_data/official/` | referenciable institucionalmente; copia completa, autosuficiente |
+| archivado | la historia del almacén oficial | se conserva, reemplazado |
+
+: {.striped}
+
+# Estado y próximos pasos
+
+## El almacén en git es provisorio: falta definir el puente entre el back end y `HD_plataform`
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### Hoy (provisorio)
+
+- El back end escribe archivos en `macroModelPlataform_data`, un repositorio git
+- `HD_plataform` lee esos archivos en su formato actual (`_HD.json`, `_PROJ.json`, `_IRF.json`); la app no se ha modificado
+- La procedencia va en archivos aparte (manifiestos, `source`), no en lo que lee la app
+- El historial git hace de pista de auditoría
+
+:::
+
+::: {.column width="50%"}
+
+### Por definir
+
+- Cómo `HD_plataform` obtiene resultados del back end: el puente
+- Un servidor para el almacén de datos, en lugar del repositorio
+- Para revisar en la app: un índice por revisión (manifiesto, diferencia con la anterior, conclusiones, etapa)
+- Autenticación, para que las decisiones identifiquen a quien las toma
+
+:::
+
+:::
+
+## Las fases 1 a 3 están hechas; faltan el puente con `HD_plataform` y la fase 4
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### Hecho (octubre 2026)
+
+- Ejercicios, conjuntos de información, ejecuciones, análisis, publicaciones
+- Funciones de gobernanza y registro de eventos; prueba de punta a punta por todas las etapas, sobre una copia de la revisión de octubre
+- Almacén oficial y promoción con la HD compacta
+
+:::
+
+::: {.column width="50%"}
+
+### Pendiente
+
+- Promover la ronda real de octubre: una **decisión del Consejo**
+- Definir el **puente entre el back end y `HD_plataform`**, y llevar el almacén de datos a un servidor
+- Vintages que sirvan a varias versiones del modelo a la vez
+- Fase 4, junto con la app: clasificación, liberación, embargos (las revisiones condicionadas en un IPoM son `highly_sensitive` hasta su publicación)
+- El catálogo de conjuntos de información (SQLite) pasará a ser un índice reconstruido desde los JSON
+
+:::
+
+:::

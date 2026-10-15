@@ -1,0 +1,80 @@
+<svg viewBox="0 0 1600 560" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cómo una versión del modelo, un snapshot de datos y supuestos se convierten en un conjunto de información, una ejecución, una revisión del ejercicio y un registro de gobernanza" style="font-family: inherit;">
+  <defs>
+    <marker id="chain-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill: var(--fig-muted, #52525b);"/>
+    </marker>
+  </defs>
+
+  <!-- 0: data snapshot (visible from the start) -->
+  <g>
+    <rect x="20" y="20" width="330" height="130" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-series-1, #1a5f8f); stroke-width: 3;"/>
+    <text x="185" y="64" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Snapshot de datos</text>
+    <text x="185" y="102" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">salida de pipelines, fechado</text>
+    <text x="185" y="132" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">nunca se reescribe</text>
+  </g>
+
+  <!-- 1: assumptions -->
+  <g class="frag" data-fragment-index="1">
+    <rect x="20" y="190" width="330" height="130" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-series-2, #bf9c69); stroke-width: 3;"/>
+    <text x="185" y="234" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Supuestos</text>
+    <text x="185" y="272" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">fuentes · juicio · ajustes</text>
+    <text x="185" y="302" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">con justificación y autor</text>
+  </g>
+
+  <!-- 2: information set -->
+  <g class="frag" data-fragment-index="2">
+    <rect x="420" y="100" width="350" height="140" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
+    <text x="595" y="146" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Conjunto de información</text>
+    <text x="595" y="186" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">observado vs supuesto</text>
+    <text x="595" y="218" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">id = SHA-256 del contenido</text>
+    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
+      <line x1="352" y1="100" x2="414" y2="140" marker-end="url(#chain-arrow)"/>
+      <line x1="352" y1="250" x2="414" y2="210" marker-end="url(#chain-arrow)"/>
+    </g>
+  </g>
+
+  <!-- 3: model version -->
+  <g class="frag" data-fragment-index="3">
+    <rect x="20" y="400" width="330" height="130" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-series-3, #39996b); stroke-width: 3;"/>
+    <text x="185" y="444" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Versión del modelo</text>
+    <text x="185" y="482" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">bundle dist/ + tendencias</text>
+    <text x="185" y="512" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">identificada por hash</text>
+  </g>
+
+  <!-- 4: execution -->
+  <g class="frag" data-fragment-index="4">
+    <rect x="850" y="280" width="320" height="140" rx="12" style="fill: var(--fig-bg, #fff); stroke: var(--fig-brand, #1b365d); stroke-width: 3;"/>
+    <text x="1010" y="326" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Ejecución</text>
+    <text x="1010" y="366" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">modelo + info + configuración</text>
+    <text x="1010" y="398" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">con hash, se reutiliza</text>
+    <g style="stroke: var(--fig-muted, #52525b); stroke-width: 3; fill: none;">
+      <line x1="772" y1="210" x2="846" y2="300" marker-end="url(#chain-arrow)"/>
+      <line x1="352" y1="465" x2="846" y2="380" marker-end="url(#chain-arrow)"/>
+    </g>
+  </g>
+
+  <!-- 5: exercise revision -->
+  <g class="frag" data-fragment-index="5">
+    <rect x="1250" y="40" width="340" height="170" rx="12" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
+    <text x="1420" y="86" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Revisión del ejercicio</text>
+    <text x="1420" y="126" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">una corrida: escenarios,</text>
+    <text x="1420" y="156" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">análisis, publicaciones,</text>
+    <text x="1420" y="186" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">conclusiones</text>
+    <line x1="1172" y1="320" x2="1244" y2="190" marker-end="url(#chain-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <g style="font-size: 20px; font-style: italic; fill: var(--fig-ink, #1b365d);">
+      <text x="1195" y="226" text-anchor="end">× escenarios</text>
+      <text x="1195" y="254" text-anchor="end">× modelos</text>
+    </g>
+  </g>
+
+  <!-- 6: governance record -->
+  <g class="frag" data-fragment-index="6">
+    <rect x="1250" y="340" width="340" height="170" rx="12" style="fill: var(--fig-grid, #e4e4e7); stroke: var(--fig-accent, #bf9c69); stroke-width: 3;"/>
+    <text x="1420" y="386" text-anchor="middle" style="font-size: 26px; font-weight: 700; fill: var(--fig-brand, #1b365d);">Registro de gobernanza</text>
+    <text x="1420" y="426" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">lista de archivos congelada</text>
+    <text x="1420" y="456" text-anchor="middle" style="font-size: 21px; fill: var(--fig-ink, #1b365d);">eventos de decisión</text>
+    <text x="1420" y="486" text-anchor="middle" style="font-size: 21px; fill: var(--fig-muted, #52525b);">encadenados por hash</text>
+    <line x1="1420" y1="212" x2="1420" y2="334" marker-end="url(#chain-arrow)" style="stroke: var(--fig-muted, #52525b); stroke-width: 3;"/>
+    <text x="1436" y="282" style="font-size: 20px; font-style: italic; fill: var(--fig-ink, #1b365d);">freeze</text>
+  </g>
+</svg>

@@ -237,6 +237,24 @@ rev = ex.run();
 
 :::
 
+## No hace falta ser experto en programación para pedir una corrida
+
+Con un asistente conectado al workspace, basta describir el trabajo en lenguaje común. Las guías de los repositorios le indican cómo preparar el entorno, correr un ejercicio y revisar los resultados.
+
+::: {.center}
+
+> “Corre el ejercicio de referencia y explícame qué cambió respecto de la ronda anterior.”
+
+:::
+
+::: {.nonincremental}
+
+- El asistente traduce la petición a los pasos y archivos que usa la plataforma.
+- La corrida deja su registro y sus resultados para revisar y reproducir.
+- La persona analista conserva las decisiones sobre supuestos, juicios e interpretación.
+
+:::
+
 ## El back end explica por qué cambia una proyección, no solo cuánto
 
 | Análisis | Responde |
